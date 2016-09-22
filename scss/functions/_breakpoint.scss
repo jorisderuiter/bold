@@ -1,0 +1,152 @@
+@function breakpoint($val: small) {
+  $bp: nth($val, 1);
+  $bp-max: 0;
+  $dir: if(length($val) > 1, nth($val, 2), up);
+  $str: '';
+  $named: false;
+
+  @if $bp == 'landscape' or $bp == 'portrait' {
+    @return '(orientation: #{$bp})';
+  }
+  @else if $bp == 'retina' {
+    @return '(-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi)';
+  }
+
+  @if type-of($bp) == 'string' {
+    @if map-has-key($breakpoints, $bp) {
+      @if $dir == 'only' or $dir == 'down' {
+        $bp-max: -zf-map-next($breakpoints, $bp);
+      }
+
+      $bp: map-get($breakpoints, $bp);
+      $named: true;
+    }
+    @else {
+      $bp: 0;
+      @warn 'breakpoint(): "#{$val}" is not defined in your $breakpoints setting.';
+    }
+  }
+
+  $bp: em($bp);
+  @if $bp-max {
+    $bp-max: em($bp-max) - (1/16);
+  }
+
+  @if $bp > 0em or $dir == 'only' or $dir == 'down' {
+    @if $dir == 'only' {
+      @if $named == true {
+        @if $bp > 0em {
+          $str: $str + '(min-width: #{$bp})';
+
+          @if $bp-max != null {
+            $str: $str + ' and ';
+          }
+        }
+
+        @if $bp-max != null {
+          $str: $str + '(max-width: #{$bp-max})';
+        }
+      }
+      @else {
+        @warn 'breakpoint(): Only named media queries can have an `only` range.';
+      }
+    }
+
+    @else if $dir == 'down' {
+      $max: if($named, $bp-max, $bp);
+
+      @if $named or $bp > 0em {
+        @if $max != null {
+          $str: $str + '(max-width: #{$max})';
+        }
+      }
+    }
+
+    @else if $bp > 0em {
+      $str: $str + '(min-width: #{$bp})';
+    }
+  }
+
+  @return $str;
+}
+
+@mixin breakpoint($value) {
+  $str: breakpoint($value);
+
+  @if $str == '' {
+    @content;
+  }
+
+  @else {
+    @media screen and #{$str} {
+      @content;
+    }
+  }
+}
+
+@function -zf-bp-serialize($map) {
+  $str: '';
+  @each $key, $value in $map {
+    $str: $str + $key + '=' + em($value) + '&';
+  }
+  $str: str-slice($str, 1, -2);
+
+  @return $str;
+}
+
+@function -zf-map-next($map, $key) {
+  $values: map-values($map);
+
+  $i: 1;
+  $found: false;
+  @each $val in map-keys($map) {
+    @if $found == false {
+      @if ($key == $val) {
+        $found: true;
+      }
+      $i: $i + 1;
+    }
+  }
+
+  @if $i > length($map) {
+    @return null;
+  }
+  @else {
+    @return nth($values, $i);
+  }
+}
+
+$small-up: null;
+$small-only: null;
+$medium-up: null;
+$medium-only: null;
+$large-up: null;
+$large-only: null;
+$xlarge-up: null;
+$xlarge-only: null;
+$xxlarge-up: null;
+$xxlarge-only: null;
+
+@if map-has-key($breakpoints, small) {
+  $small-up: screen;
+  $small-only: unquote('screen and #{breakpoint(small only)}');
+}
+
+@if map-has-key($breakpoints, medium) {
+  $medium-up: unquote('screen and #{breakpoint(medium)}');
+  $medium-only: unquote('screen and #{breakpoint(medium only)}');
+}
+
+@if map-has-key($breakpoints, large) {
+  $large-up: unquote('screen and #{breakpoint(large)}');
+  $large-only: unquote('screen and #{breakpoint(large only)}');
+}
+
+@if map-has-key($breakpoints, xlarge) {
+  $xlarge-up: unquote('screen and #{breakpoint(xlarge)}');
+  $xlarge-only: unquote('screen and #{breakpoint(xlarge only)}');
+}
+
+@if map-has-key($breakpoints, xxlarge) {
+  $xxlarge-up: unquote('screen and #{breakpoint(xxlarge)}');
+}

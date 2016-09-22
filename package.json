@@ -1,0 +1,25 @@
+{
+  "name": "bold-framework",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.html",
+  "scripts": {
+    "start": "gulp",
+    "test": "npm run test:sass",
+    "test:visual": "gulp test"
+  },
+  "author": "Joris de Ruiter <joris.ruiter@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-concat": "latest",
+    "gulp-notify": "latest",
+    "gulp-plumber": "latest",
+    "gulp-sass": "latest",
+    "gulp-sourcemaps": "latest",
+    "gulp-rename": "latest"
+  },
+  "dependencies": {
+    "node-bourbon": "latest"
+  }
+}

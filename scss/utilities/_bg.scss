@@ -1,0 +1,89 @@
+.bg-white {
+  background-color: $white;
+  &.button {
+    &:hover, &:active {
+      background-color: darken($white, 10%);
+    }
+  }
+}
+
+.bg-light-gray {
+  background-color: $light-gray;
+  &.button {
+    &:hover, &:active {
+      background-color: darken($light-gray, 10%);
+    }
+  }
+}
+
+.bg-medium-gray {
+  background-color: $medium-gray;
+  &.button {
+    &:hover, &:active {
+      background-color: darken($medium-gray, 10%);
+    }
+  }
+}
+
+.bg-dark-gray {
+  background-color: $dark-gray;
+  &.button {
+    &:hover, &:active {
+      background-color: darken($dark-gray, 10%);
+    }
+  }
+}
+
+.bg-black {
+  background-color: $black;
+  &.button {
+    &:hover, &:active {
+      background-color: darken($black, 10%);
+    }
+  }
+}
+
+.bg-primary-color {
+  background-color: $primary-color;
+  &.button {
+    &:hover, &:active {
+      background-color: darken($primary-color, 10%);
+    }
+  }
+}
+
+.bg-secondary-color {
+  background-color: $secondary-color;
+  &.button {
+    &:hover, &:active {
+      background-color: darken($secondary-color, 10%);
+    }
+  }
+}
+
+.bg-success-color {
+  background-color: $success-color;
+  &.button {
+    &:hover, &:active {
+      background-color: darken($success-color, 10%);
+    }
+  }
+}
+
+.bg-warning-color {
+  background-color: $warning-color;
+  &.button {
+    &:hover, &:active {
+      background-color: darken($warning-color, 10%);
+    }
+  }
+}
+
+.bg-alert-color {
+  background-color: $alert-color;
+  &.button {
+    &:hover, &:active {
+      background-color: darken($alert-color, 10%);
+    }
+  }
+}

@@ -1,0 +1,38 @@
+.color-white {
+  color: $white;
+  &:hover, &:focus, &:active {
+    color: $white;
+  }
+}
+
+.color-light-gray {
+  color: $light-gray;
+}
+
+.color-medium-gray {
+  color: $medium-gray;
+}
+
+.color-dark-gray {
+  color: $dark-gray;
+}
+
+.color-primary-color {
+  color: $primary-color;
+}
+
+.color-secondary-color {
+  color: $secondary-color;
+}
+
+.color-success-color {
+  color: $success-color;
+}
+
+.color-warning-color {
+  color: $warning-color;
+}
+
+.color-alert-color {
+  color: $alert-color;
+}

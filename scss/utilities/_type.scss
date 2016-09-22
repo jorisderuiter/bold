@@ -1,0 +1,57 @@
+.text-center {
+  text-align: center;
+}
+
+.font-weight-light {
+  font-weight: 300;
+}
+
+.font-weight-normal {
+  font-weight: normal;
+}
+
+.font-weight-bold {
+  font-weight: bold;
+}
+
+.line-height-1 {
+  line-height: 1;
+}
+
+.text-uppercase {
+  text-transform: uppercase;
+}
+
+.text-underline {
+  text-decoration: underline;
+}
+
+.text-truncate {
+  white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.white-text-over-image {
+  text-shadow: 0px 0px 1px rgba($black, 0.3);
+}
+
+@for $i from 1 through 6 {
+  .h#{$i}, %h#{$i}{
+    @extend h#{$i} !optional;
+  }
+}
+
+@for $i from -4 through 20 {
+
+  .font-size-ms#{$i}{
+    font-size: modular-scale($i);
+  }
+  @each $breakpoint in $breakpoint-classes {
+    @include breakpoint(#{$breakpoint} up){
+      .font-size-ms#{$i}{
+        font-size: modular-scale($i);
+      }
+    }
+  }
+}

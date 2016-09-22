@@ -1,0 +1,11 @@
+@each $breakpoint in $breakpoint-classes {
+  @include breakpoint($breakpoint up) {
+    .#{$breakpoint}-float-left{
+      float: left;
+    }
+
+    .#{$breakpoint}-float-right{
+      float: right;
+    }
+  }
+}
